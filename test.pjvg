@@ -1,0 +1,27 @@
+{
+	"pjvgVersion": ["draft"],
+	"fonts": {
+		"body": {
+			"size": 30
+		}
+	},
+	"document": [
+		{
+			"type": "shape",
+			"shape": "fillRectangle",
+			"color": [255, 0, 0],
+			"position": [50, 50],
+			"size": [190, 36],
+			"children": [
+				{
+					"type": "shape",
+					"shape": "text",
+					"color": [255, 255, 255],
+					"position": [0, 0],
+					"font": "body",
+					"text": "Hello, world!"
+				}
+			]
+		}
+	]
+}
