@@ -1,37 +1,31 @@
 # PJVG Specification
-(draft 0)
+(draft 1)
 
 PJVG is a lean JSON-based vector image format. A PJVG document consists of a JSON object at the root with some properties and a list of PJVG objects to render.
 
 A PJVG document has the following fields:
-- `pjvgVersion`: A list denoting the version of PJVG. Currently always `[0, 0, 0, "draft"]`
-- `colors` (optional): An object containing a list of colors for the PJVG to use by reference.
-- `fonts` (optional): An object containing a list of fonts for the PJVG to use by reference.
-- `document` (optional): A list of PJVG objects at the top level.
+- `format`: The string "pjvg".
+- `version`: A list denoting the version of PJVG. Currently always `[0, 0, 0, "draft"]`.
+- `level`: The feature level of PJVG this document expects. Feature levels above 1 are presently not defined.
+- `extensions` (optional): A list of extensions this PJVG document expects.
+- `document` (optional): A PJVG `document` object denoting the root element.
 
-A PJVG document might look like  this:
+A PJVG document might look like this:
 ```json
 {
 	"format": "pjvg",
 	"version": [0, 0, 0, "draft"],
-	"classes": {
-	},
-	"colors": {
-		"red": [255, 0, 0],
-		"white": [255, 255, 255]
-	},
-	"fonts": {
-		"$default": {
-			"family": "Helvetica"
-		}
-	},
+	"level": 1,
+	"extensions": [],
 	"document": {
+		"type": "document",
+		"size": ["800px", "400px"],
 		"children": [
 			{
 				"type": "shape",
 				"shape": "rectangle",
 				"filled": true,
-				"color": "@colors.red",
+				"color": [255, 0, 0],
 				"position": [0, 0],
 				"size": ["50%", "50%"],
 				"padding": ["4px", "4px", "4px", "4px"],
@@ -39,8 +33,8 @@ A PJVG document might look like  this:
 					{
 						"type": "shape",
 						"shape": "text",
-						"color": "@colors.white",
-						"clip": [[0, 0], ["100%", "100%"],
+						"color": [255, 255, 255],
+						"clip": [[0, 0], ["100%", "100%"]],
 						"align": "center",
 						"fontSize": "fill",
 						"text": "Hello, world!"
@@ -49,12 +43,5 @@ A PJVG document might look like  this:
 			}
 		]
 	}
-}
-```
-
-A PJVG object has the following format as a base:
-```json
-{
-	"type": "<object type>",
 }
 ```
