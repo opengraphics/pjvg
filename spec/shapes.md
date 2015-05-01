@@ -9,6 +9,7 @@ Level 1 PJVG shapes:
 - `bezier`: An arbitrary degree bezier curve.
 - `text`: A piece of text.
 - `rectangle`: A polygon with four points and extra flow features.
+- `circle`: A polygon with renderer-defined segments.
 
 ### Shape
 All shapes can have the following fields:
@@ -17,7 +18,11 @@ All shapes can have the following fields:
 - `rotation = 0` (`<rotation>`): The rotation of the object.
 - `rotationOffset = ["50%", "50%"]` (`<point>`): A point relative to the upper-left corner to rotate around.
 - `translation = [0, 0]` (`<position>`): A position to translate the object with.
-- `clip = null` (`null|<bounding-box>|<shape>`): Defines a clipping box or shape for this object. Null is no clipping.
+- `clip = null` (`null|<bounding-box>|<shape>|"parent"`): Defines a clipping area for this shape.
+	- `null`: No clipping will be performed.
+	- `<bounding-box>`: Clipping will be performed within the bounding box.
+	- `<shape>`: Clipping will be performed using the shape as a mask.
+	- `"parent"`: Clipping will occur using the parent element as a mask.
 - `children = []` (`array`): An array of children that this object has.
 
 ### Polygon
@@ -37,7 +42,7 @@ A polygon has the following fields:
 
 ### Text
 - `text = ""` (`string`): Text to draw.
-- `box = null` (`null|<bounding-box>|"parent"): How to box the text.
+- `box = null` (`null|<bounding-box>|"parent"`): How to box the text.
 	- `null`: does no text wrapping, alignment, or boxing.
 	- `<bounding-box>`: Wraps text and clips it on this box
 	- `"parent"`: Only valid if the parent is a `rectangle` shape; wraps text to that shape.
@@ -51,7 +56,15 @@ A polygon has the following fields:
 ### Rectangle
 - `size = [0, 0]` (`<size>`): The size of the rectangle.
 - `fill = false` (`bool`): Whether the polygon should be filled.
-- `radius = null` (`null|<length>`): The radius of the edges of the rectangle. `null` denotes no rounded edges.
+- `borderRadius = null` (`null|<length>`): The radius of the edges of the rectangle. `null` denotes no rounded edges.
+- `outline = false` (`bool`): Whether the polygon should be outlined.
+- `fillColor = "#ffffff"` (`<color>`): The color to fill with.
+- `outlineColor = "#ffffff"` (`<color>`): The color to outline with.
+- `outlineWidth = "1px"` (`<length>`): How thick outlines should be.
+
+### Circle
+- `radius = 0` (`<length>`): The radius of the circle.
+- `fill = false` (`bool`): Whether the polygon should be filled.
 - `outline = false` (`bool`): Whether the polygon should be outlined.
 - `fillColor = "#ffffff"` (`<color>`): The color to fill with.
 - `outlineColor = "#ffffff"` (`<color>`): The color to outline with.
