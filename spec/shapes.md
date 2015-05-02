@@ -11,6 +11,7 @@ Level 1 PJVG shapes:
 - `text`: A piece of text.
 - `rectangle`: A polygon with four points and extra flow features.
 - `circle`: A polygon with renderer-defined segments.
+- `operator`: An operator on one or more shapes.
 
 ### Shape
 All shapes can have the following fields:
@@ -80,3 +81,12 @@ All shapes can have the following fields:
 - `outlineColor = "#ffffff"` (`<color>`): The color to outline with.
 - `outlineWidth = "1px"` (`<length>`): How thick outlines should be.
 - `outlineStyle = "solid"` (`<line-style>`): The style of the outline lines.
+
+### Operators
+Operators should have their `operator` field set to what operator they are.
+
+The following operators are in PJVG level 1:
+- `inverse`: Uses the `operand` field and returns the inverse of it.
+- `union`: Uses a list field named `operands` and returns the union of those shapes.
+- `intersection`: Uses a list field named `operands` and returns the intersection of those shapes.
+- `link`: Uses a list field named `operands` of `polygon` and `bezier` shapes and links them togetther into a single polygon.
