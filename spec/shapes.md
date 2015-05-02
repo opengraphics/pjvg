@@ -10,7 +10,7 @@ Level 1 PJVG shapes:
 - `bezier`: An arbitrary degree bezier curve.
 - `text`: A piece of text.
 - `rectangle`: A polygon with four points and extra flow features.
-- `circle`: A polygon with renderer-defined segments.
+- `ellipse`: A polygon with renderer-defined segments.
 - `operator`: An operator on one or more shapes.
 
 ### Shape
@@ -75,9 +75,9 @@ For `"solid"` fills:
 - `outlineWidth = "1px"` (`<length>`): How thick outlines should be.
 - `outlineStyle = "solid"` (`<line-style>`): The style of the outline lines.
 
-### Circle
-- `radius = 0` (`<length>`): The radius of the circle.
-- `arcRange = [0, 2pi]` (`[<angle>, <angle>]`): The angle range of the circle to draw.
+### Ellipse
+- `size = [0, 0]` (`<size>`): The size of the ellipse.
+- `arcRange = [0, 2pi]` (`[<angle>, <angle>]`): The angle range of the ellipse to draw.
 - `fill = false` (`bool`): Whether the polygon should be filled.
 - `outline = false` (`bool`): Whether the polygon should be outlined.
 - `fillColor = "#ffffff"` (`<color>`): The color to fill with.
