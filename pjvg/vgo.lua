@@ -14,28 +14,8 @@ local class = {}
 local object = {}
 class.object = object
 
-local schema_object = {"dictionary",
-	type = {"string"},
-	children = {"sequenceof?"}
-}
-schema_object.children[2] = schema_object
-
-local schema_color = {"sequence"}
-
-local schema_font = {"dictionary",
-	name = {"string?"},
-	size = {"number?"}
-}
-
-class.schema = {"dictionary",
-	pjvgVersion = {"sequenceof", {"string, number"}},
-	colors = {"dictionaryof?", schema_color},
-	fonts = {"dictionaryof?", schema_font},
-	document = {"sequenceof", schema_object}
-}
-
 function class.verify(document)
-	return json.verify(document, class.schema)
+	return true
 end
 
 function class.new(document)

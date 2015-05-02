@@ -13,7 +13,7 @@ end
 local core = {
 	loveFSEnabled = true,
 	specVersion = version("draft"),
-	version = version(1, 0, 0, "alpha")
+	version = version(0, 0, 0, "draft")
 }
 
 return core

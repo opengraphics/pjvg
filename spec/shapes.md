@@ -37,6 +37,9 @@ All shapes can have the following fields:
 - `outlineStyle = "solid"` (`<line-style>`): The style of the outline lines.
 
 ### Fill
+- `fillStyle = "solid"` (`"solid"`): How to fill.
+
+For `"solid"` fills:
 - `fillColor = "#ffffff"`: The color to fill with.
 
 ### Bezier

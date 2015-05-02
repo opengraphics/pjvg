@@ -39,6 +39,7 @@ local function unescape_string(object)
 			:gsub("\\r", "\r")
 			:gsub("\\n", "\n")
 			:gsub("\\t", "\t")
+			-- todo: unicode sequences
 	)
 end
 
