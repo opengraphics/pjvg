@@ -28,7 +28,7 @@ All shapes can have the following fields:
 - `children = []` (`array`): An array of children that this object has.
 
 ### Polygon
-- `points = []` (`array`): A list of points that the polygon has relative to the top-left.
+- `points = []` (`array`): A list of points that the polygon has relative to its position.
 - `fill = false` (`bool`): Whether the polygon should be filled.
 - `outline = false` (`bool`): Whether the polygon should be outlined.
 - `fillColor = "#ffffff"` (`<color>`): The color to fill with.
