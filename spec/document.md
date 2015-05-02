@@ -1,7 +1,7 @@
 # Document
-(draft 1)
+(draft 2)
 
-## Level 1
+## Level 1 (feature level `document-level1`)
 A PJVG document has the following fields:
 - `size`: A size field denoting the base/relative size of the element. It gives a baseline size and an aspect ratio for the document.
 - `children` (optional): A list of children that the document contains. 

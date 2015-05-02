@@ -1,7 +1,7 @@
 # Dimensions
-(draft 1)
+(draft 2)
 
-## Level 1
+## Level 1 (feature `dimensions-level1`)
 PJVG level 1 dimensions consist of a number and a unit, or a number with no unit in the special case of 0.
 
 Valid `<length>` units are:

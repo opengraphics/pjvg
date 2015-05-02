@@ -1,5 +1,5 @@
 # Objects
-(draft 1)
+(draft 2)
 
 As of the current draft, the following objects are valid in PJVG:
 - `document`: A full document tree (see [document](document.md))

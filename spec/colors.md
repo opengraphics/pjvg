@@ -1,7 +1,7 @@
 # Colors
-(draft 1)
+(draft 2)
 
-## Level 1
+## Level 1 (feature level `colors-level1`)
 A color is defined as one of the following:
 - A color array:
 	- RGB, (`[r, g, b]`)
