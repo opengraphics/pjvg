@@ -49,6 +49,13 @@ function object:parseSelector(str)
 		return str
 	end
 
+	if (str:sub(1, 1) == "@") then
+		str = str:sub(2)
+	else
+		-- Invalid selector!
+		return {}
+	end
+
 	local selector = {}
 
 	for key in str:gmatch("[^%.]+") do
