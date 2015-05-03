@@ -13,3 +13,4 @@ Example selectors:
 - `@#name` selects the element with name `name` in the root
 - `@1.1` selects the first element within the first element in the root
 - `@#a.#b` selects `a` in the root, then `b` inside `a`.
+- `@#a.size.1` selects the horizontal component of the size of `a`.
