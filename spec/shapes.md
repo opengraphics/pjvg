@@ -1,9 +1,9 @@
 # Shapes
-(draft 2)
+(draft 3)
 
 Shapes in PJVG denote anything that can be drawn. They have an object type of "shape".
 
-## Level 1
+## Level 1 (feature `shapes-level1`)
 Level 1 PJVG shapes:
 - `polygon`: A list of points forming a closed polygon.
 - `fill`: A shape that fills completely. Used with clipping masks to fill arbitrary shapes.
@@ -71,7 +71,7 @@ The following operators are in PJVG level 1:
 - `intersection`: Uses a list field named `operands` and returns the intersection of those shapes.
 - `link`: Uses a list field named `operands` of `polygon` and `bezier` shapes and links them togetther into a single polygon.
 
-## Level 2
+## Level 2 (feature `shapes-level2`)
 All level 2 shapes:
 - `bezier`: An arbitrary degree bezier curve.
 - `text`: A piece of text.

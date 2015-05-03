@@ -9,7 +9,7 @@ A PJVG document has the following fields:
 - `features`: A list of features this PJVG document expects to be present.
 - `document` (optional): A PJVG `document` object denoting the root element.
 
-Most features are of the form `<feature-name>-<level>-<version>` where `<version>` is optional. If defined, `<version>` must have the same major version number as the document.
+Most features are of the form `<feature-name>-<level>-<version>` where `<version>` is optional. If defined, `<version>` must have the same major version number as the document and must be equal to or lower than the document version.
 
 For example, `rectangle-level1` implies support of the level 1 specification of rectangles. The version of rectangles supported is the same as the stated version of the document.
 

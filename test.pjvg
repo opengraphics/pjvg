@@ -1,8 +1,7 @@
 {
 	"format": "pjvg",
 	"version": [0, 0, 0, "draft"],
-	"level": 1,
-	"extensions": [],
+	"features": ["level1", "text-level2"],
 	"document": {
 		"type": "document",
 		"size": ["400px", "200px"],
