@@ -17,7 +17,7 @@ function pjvg.parse(body)
 		return false, err
 	end
 
-	return vgo.new(model)
+	return vgo:new(model)
 end
 
 function pjvg.load(filename)

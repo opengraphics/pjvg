@@ -14,19 +14,19 @@ local class = {}
 local object = {}
 class.object = object
 
-function class.verify(document)
+function class:verify(document)
 	return true
 end
 
-function class.new(document)
-	local success, err = class.verify(document)
+function class:new(document)
+	local success, err = self:verify(document)
 
 	if (not success) then
 		return false, err
 	end
 
 	setmetatable(document, {
-		__index = class.object
+		__index = self.object
 	})
 
 	return document
