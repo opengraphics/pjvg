@@ -9,12 +9,13 @@ local path = (...):gsub("%.init$", "") .. "."
 local utility = require(root .. "utility")
 local gcontext = require(path .. "gcontext")
 local gstate = require(path .. "gstate")
+local renderResult = require(path .. "renderResult")
 
 local renderer = {
 	available = not not love
 }
 
-function renderer.draw(vgo, x, y)
+function renderer.render(vgo, x, y)
 	x, y = x or 0, y or 0
 
 	local state = gstate:new {
@@ -28,11 +29,22 @@ function renderer.draw(vgo, x, y)
 		g = gcontext()
 	}
 
+	local w, h = state:units({"size", 1}), state:units({"size", 2})
+	local canvas = love.graphics.newCanvas(w, h)
+	local old_blend = love.graphics.getBlendMode()
+	local old_canvas = love.graphics.getCanvas()
+
+	love.graphics.setBlendMode("additive")
+	love.graphics.setCanvas(canvas)
 	if (vgo.document) then
 		state.g:translate(x, y)
 		renderer.drawDocument(vgo.document, state)
 		state.g:untranslate()
 	end
+	love.graphics.setCanvas(old_canvas)
+	love.graphics.setBlendMode(old_blend)
+
+	return renderResult:new(canvas)
 end
 
 function renderer.drawDocument(self, state)

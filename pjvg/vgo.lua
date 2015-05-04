@@ -25,6 +25,7 @@ function class:new(document)
 		return false, err
 	end
 
+	document.dirty = false
 	setmetatable(document, {
 		__index = self.object
 	})
@@ -40,8 +41,27 @@ function object:save(filename)
 	fs.write(filename, self:serialize())
 end
 
+function object:render()
+	self.__result = renderer.render(self)
+	self.dirty = false
+
+	return self.__result
+end
+
+function object:getRenderResult()
+	if (not self.__result or self.dirty) then
+		self:render()
+	end
+
+	return self.__result
+end
+
 function object:draw()
-	renderer.draw(self)
+	if (not self.__result or self.dirty) then
+		self:render()
+	end
+
+	self.__result:draw()
 end
 
 function object:parseSelector(str)
