@@ -109,12 +109,12 @@ function object:selectParent(root, selector, ...)
 	return self:select(root, reselect, ...)
 end
 
-function object:getPropertyKey(selector)
+function object:getProperty(selector)
 	selector = self:parseSelector(selector)
 
 	for key, nav in ipairs(selector) do
 		if (prop or type(nav) == "string" and nav:sub(1, 1) ~= "#") then
-			return key
+			return key, nav
 		end
 	end
 end

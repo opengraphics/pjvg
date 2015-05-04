@@ -14,7 +14,7 @@ function class:new(body)
 end
 
 local function select_parents_same(self, scope)
-	local object_key = self.vgo:getPropertyKey(scope) - 1
+	local object_key = self.vgo:getProperty(scope) - 1
 
 	local diff = #scope - object_key
 	local rescope = {}
@@ -63,14 +63,7 @@ function object:units(scope, dim)
 		elseif (unit == "%") then
 			local frac = tonumber(value) / 100
 
-			local pname, pkey
-			for i = #scope, 1, -1 do
-				if (type(scope[i]) == "string") then
-					pkey = i
-					pname = scope[i]
-					break
-				end
-			end
+			local pkey, pname = self.vgo:getProperty(scope)
 
 			local pval
 			if (unit_map[pname]) then
