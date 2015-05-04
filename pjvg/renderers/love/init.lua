@@ -34,7 +34,7 @@ function renderer.render(vgo, x, y)
 	local old_blend = love.graphics.getBlendMode()
 	local old_canvas = love.graphics.getCanvas()
 
-	love.graphics.setBlendMode("additive")
+	love.graphics.setBlendMode("alpha")
 	love.graphics.setCanvas(canvas)
 	if (vgo.document) then
 		state.g:translate(x, y)
@@ -103,16 +103,98 @@ end
 local shapes = {}
 renderer.shapes = shapes
 
+local function is_box(v)
+	return not not v
+end
+
+-- level1: partial
+-- missing rotation, clip for non-bounding-box
 function renderer.drawShape(self, state)
+	local object = state.vgo:select(nil, state.scope)
+	local clip_box = is_box(object.clip)
+
+	if (clip_box) then
+		state.g:scissor(state:box(state.scope, "clip"))
+	end
+
+	if (object.scale) then
+		state.g:scale(object.scale[1], object.scale[2])
+	end
+
 	if (shapes[self.shape]) then
 		return shapes[self.shape](self, state)
+	end
+
+	if (clip_box) then
+		state.g:unscissor()
+	end
+
+	if (object.scale) then
+		state.g:unscale()
 	end
 
 	print(("Can't render shape of type %q"):format(self.shape))
 end
 
+-- level1: implemented
+function shapes.polygon(self, state)
+	local object = state.vgo:select(nil, state.scope)
+
+	local lovePoints = {}
+	if (object.points) then
+		for key in ipairs(object.points) do
+			table.insert(lovePoints, (state:units(utility.tableAppend(state.scope, "points", key, 1))))
+			table.insert(lovePoints, (state:units(utility.tableAppend(state.scope, "points", key, 2))))
+		end
+	end
+
+	if (self.fill) then
+		love.graphics.setColor(self.fillColor)
+
+		if (love.math.isConvex(lovePoints)) then
+			love.graphics.polygon("fill", lovePoints)
+		else
+			local tris = love.math.triangulate(lovePoints)
+			for key, tri in ipairs(tris) do
+				love.graphics.polygon("fill", tri)
+			end
+		end
+	end
+
+	if (self.outline) then
+		local outlineWidth = state:single(state.scope, "outlineWidth")
+
+		love.graphics.setColor(self.outlineColor)
+		love.graphics.setLineWidth(outlineWidth)
+		love.graphics.polygon("line", lovePoints)
+	end
+end
+
+-- level1: implemented
+-- issues: outline misaligned
+function shapes.rectangle(self, state)
+	local pos_x, pos_y = state:vec2(state.scope, "position")
+	local size_x, size_y = state:vec2(state.scope, "size")
+
+	if (self.fill) then
+		love.graphics.setColor(self.fillColor)
+
+		love.graphics.rectangle("fill", pos_x, pos_y, size_x, size_y)
+	end
+
+	if (self.outline) then
+		local outlineWidth = state:single(state.scope, "outlineWidth")
+
+		love.graphics.setColor(self.outlineColor)
+		love.graphics.setLineWidth(outlineWidth)
+		love.graphics.rectangle("line", pos_x, pos_y, size_x, size_y)
+	end
+end
+
+-- level2: partial
+-- missing vetical align, font family, font weight
 function shapes.text(self, state)
-	love.graphics.setColor(self.color)
+	love.graphics.setColor(self.fontColor)
 	love.graphics.setFont(state.fonts["$default"])
 
 	local pos_x, pos_y = state:vec2(state.scope, "position")
@@ -132,23 +214,6 @@ function shapes.text(self, state)
 		love.graphics.printf(self.text, pos_x, pos_y, bsize_x, align)
 	else
 		love.graphics.print(self.text, pos_x, pos_y)
-	end
-end
-
-function shapes.rectangle(self, state)
-	if (self.filled) then
-		love.graphics.setColor(self.fillColor)
-
-		local pos_x, pos_y = state:vec2(state.scope, "position")
-		local size_x, size_y = state:vec2(state.scope, "size")
-
-		love.graphics.rectangle("fill", pos_x, pos_y, size_x, size_y)
-	end
-
-	if (self.outline) then
-		love.graphics.setColor(self.outlineColor)
-		love.graphics.setLineWidth(self.outlineWidth)
-		love.graphics.rectangle("line", self.position[1], self.position[2], self.size[1], self.size[2])
 	end
 end
 

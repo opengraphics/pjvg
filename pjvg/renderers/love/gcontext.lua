@@ -6,7 +6,8 @@
 return function()
 	local gcontext = {
 		history_scissor = {},
-		history_translation = {}
+		history_translation = {},
+		history_scale = {}
 	}
 
 	function gcontext:scissor(x, y, w, h)
@@ -60,6 +61,21 @@ return function()
 		end
 
 		return x, y
+	end
+
+	function gcontext:scale(x, y)
+		table.insert(self.history_scale, {x, y})
+		love.graphics.scale(x, y)
+	end
+
+	function gcontext:unscale()
+		local history = self.history_scale
+
+		local last = history[#history]
+		if (last) then
+			love.graphics.scale(1 / last[1], 1 / last[2])
+			history[#history] = nil
+		end
 	end
 
 	return gcontext

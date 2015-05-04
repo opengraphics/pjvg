@@ -18,15 +18,15 @@ function class:new(body)
 end
 
 local function select_parents_same(self, selector)
-	local object_key = self.vgo:getProperty(selector) - 1
+	local objectSelector, propertySelector = self.vgo:splitSelector(selector)
 
-	local diff = #selector - object_key
 	local rescope = {}
-	for i = 1, object_key - 1 do
-		table.insert(rescope, selector[i])
+	for i = 1, #objectSelector - 1 do
+		table.insert(rescope, objectSelector[i])
 	end
-	for i = diff, #selector do
-		table.insert(rescope, selector[i])
+
+	for i = 1, #propertySelector do
+		table.insert(rescope, propertySelector[i])
 	end
 
 	return rescope
@@ -48,10 +48,54 @@ local unit_map = {
 
 	position = function(self, selector)
 		local parentSelector = self.vgo:splitSelector(selector)
+		parentSelector[#parentSelector] = nil
 		table.insert(parentSelector, "size")
 		table.insert(parentSelector, selector[#selector])
 
 		return self:units(parentSelector)
+	end,
+
+	clip = function(self, selector)
+		local objectSelector = self.vgo:splitSelector(selector)
+		local pos_x, pos_y = self:vec2(objectSelector, "position")
+		local size_x, size_y = self:vec2(objectSelector, "size")
+		local key1, key2 = selector[#selector - 1], selector[#selector]
+
+		-- This is certainly not ideal.
+		if (key1 == 1) then
+			if (key2 == 1) then
+				return pos_x
+			else
+				return pos_y
+			end
+		else
+			if (key2 == 1) then
+				return size_x
+			else
+				return size_y
+			end
+		end
+	end,
+
+	points = function(self, selector)
+		local parentSelector = self.vgo:splitSelector(selector)
+		parentSelector[#parentSelector] = nil
+		local key = selector[#selector]
+		local size_x, size_y = self:vec2(parentSelector, "size")
+
+		if (key == 1) then
+			return size_x
+		else
+			return size_y
+		end
+	end,
+
+	fontSize = function(self, selector)
+		local parentSelector = self.vgo:splitSelector(selector)
+		parentSelector[#parentSelector] = nil
+		local size_x, size_y = self:vec2(parentSelector, "size")
+
+		return size_y
 	end
 }
 
@@ -71,8 +115,10 @@ function object:units(selector, dim)
 			error("Invalid empty unit!")
 		end
 
-		if (unit == "px" or unit == "pt") then
+		if (unit == "px" or unit == "pt" or unit == "rad") then
 			return tonumber(value)
+		elseif (unit == "deg") then
+			return math.rad(tonumber(value))
 		elseif (unit == "%") then
 			local frac = tonumber(value) / 100
 
@@ -96,6 +142,11 @@ function object:units(selector, dim)
 	else
 		error("Invalid unit: " .. tostring(dim))
 	end
+end
+
+function object:single(selector, name)
+	return
+		self:units(utility.tableAppend(selector, name))
 end
 
 function object:vec2(selector, name)

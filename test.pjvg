@@ -9,16 +9,36 @@
 			{
 				"type": "shape",
 				"shape": "rectangle",
-				"filled": true,
+				"fill": true,
 				"fillColor": [255, 0, 0],
-				"position": [0, 0],
-				"size": ["100%", "100%"],
+				"outline": true,
+				"outlineWidth": "4px",
+				"outlineColor": [255, 255, 255],
+				"position": ["4px", "4px"],
+				"size": ["98%", "98%"],
 				"children": [
 					{
 						"type": "shape",
+						"shape": "polygon",
+						"fill": true,
+						"fillColor": [64, 64, 64],
+						"outline": true,
+						"outlineWidth": "4px",
+						"outlineColor": [0, 0, 0],
+						"points": [
+							[0, 0],
+							["50%", "100%"],
+							["100%", "100%"],
+							["95%", "15%"],
+							["50%", "70%"]
+						],
+					},
+					{
+						"type": "shape",
 						"shape": "text",
-						"color": [255, 255, 255],
-						"fontSize": "32pt",
+						"position": [0, "15%"],
+						"fontColor": [255, 255, 255],
+						"fontSize": "20%",
 						"box": [[0, 0], ["100%", "100%"]],
 						"horizontalAlign": "center",
 						"text": "Hello, world!"

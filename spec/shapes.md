@@ -1,5 +1,5 @@
 # Shapes
-(draft 3)
+(draft 4)
 
 Shapes in PJVG denote anything that can be drawn. They have an object type of "shape".
 
@@ -42,10 +42,6 @@ For `"solid"` fills:
 ### Rectangle (feature `rectangle-level1`)
 - `size = [0, 0]` (`<size>`): The size of the rectangle.
 - `fill = false` (`bool`): Whether the polygon should be filled.
-- `borderRadius = null` (`null|<length>|[<length>,<length>,<length>,<length>]`): The border radius of the rectangle.
-	- `null`: No rounding on the edges.
-	- `<length>`: An equal radius on all edges.
-	- `[4x<length>]`: Individual border radii, starting at top left going clockwise.
 - `outline = false` (`bool`): Whether the polygon should be outlined.
 - `fillColor = "#ffffff"` (`<color>`): The color to fill with.
 - `outlineColor = "#ffffff"` (`<color>`): The color to outline with.
@@ -72,9 +68,18 @@ The following operators are in PJVG level 1:
 - `link`: Uses a list field named `operands` of `polygon` and `bezier` shapes and links them togetther into a single polygon.
 
 ## Level 2 (feature `shapes-level2`)
-All level 2 shapes:
+The following shapes have additions in level 2:
+- `rectangle`
+
+Level 2 adds the following shapes:
 - `bezier`: An arbitrary degree bezier curve.
 - `text`: A piece of text.
+
+### Rectangle (feature `rectangle-level2`)
+- `borderRadius = null` (`null|<length>|[<length>,<length>,<length>,<length>]`): The border radius of the rectangle.
+	- `null`: No rounding on the edges.
+	- `<length>`: An equal radius on all edges.
+	- `[4x<length>]`: Individual border radii, starting at top left going clockwise.
 
 ### Bezier (feature `bezier-level2`)
 - `points = []` (array of `<point>`): A list of points defining the curve.
