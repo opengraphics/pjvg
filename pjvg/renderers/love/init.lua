@@ -84,10 +84,7 @@ function renderer.drawObject(self, state)
 
 	if (self.children) then
 		if (self.position) then
-			state.g:translate(
-				state:units(utility.tableAppend(state.scope, "position", 1)),
-				state:units(utility.tableAppend(state.scope, "position", 2))
-			)
+			state.g:translate(state:vec2(state.scope, "position"))
 		end
 
 		local skey = #state.scope + 1
@@ -117,8 +114,8 @@ end
 function shapes.text(self, state)
 	love.graphics.setColor(self.color)
 	love.graphics.setFont(state.fonts["$default"])
-	local pos_x = state:units(utility.tableAppend(state.scope, "position", 1)) or 0
-	local pos_y = state:units(utility.tableAppend(state.scope, "position", 2)) or 0
+
+	local pos_x, pos_y = state:vec2(state.scope, "position")
 
 	local font_size = state:units(utility.tableAppend(state.scope, "fontSize")) or "$default"
 	if (not state.fonts[font_size]) then
@@ -129,12 +126,7 @@ function shapes.text(self, state)
 
 	local box = self.box
 	if (box) then
-		local bpos_x = state:units((utility.tableAppend(state.scope, "box", 1, 1))) or 0
-		local bpos_y = state:units((utility.tableAppend(state.scope, "box", 1, 2))) or 0
-		local bsize_x = state:units((utility.tableAppend(state.scope, "box", 2, 1))) or 0
-		local bsize_y = state:units((utility.tableAppend(state.scope, "box", 2, 2))) or 0
-
-		local bsx_selector = utility.tableAppend(state.scope, "box", 2, 1)
+		local bpos_x, bpos_y, bsize_x, bsize_y = state:box(state.scope, "box")
 
 		local align = self.horizontalAlign or "left"
 		love.graphics.printf(self.text, pos_x, pos_y, bsize_x, align)
@@ -146,10 +138,10 @@ end
 function shapes.rectangle(self, state)
 	if (self.filled) then
 		love.graphics.setColor(self.fillColor)
-		local pos_x = state:units(utility.tableAppend(state.scope, "position", 1)) or 0
-		local pos_y = state:units(utility.tableAppend(state.scope, "position", 2)) or 0
-		local size_x = state:units(utility.tableAppend(state.scope, "size", 1)) or 0
-		local size_y = state:units(utility.tableAppend(state.scope, "size", 2)) or 0
+
+		local pos_x, pos_y = state:vec2(state.scope, "position")
+		local size_x, size_y = state:vec2(state.scope, "size")
+
 		love.graphics.rectangle("fill", pos_x, pos_y, size_x, size_y)
 	end
 
