@@ -1,5 +1,5 @@
 # Type: Polygon
-A `Polygon` is a [`Shape`](Shape.md) representing a list of points.
+A `Polygon` is a [`Shape`](./Shape.md) representing a list of points.
 
 A Polygon has no requirements to be closed or convex/concave.
 

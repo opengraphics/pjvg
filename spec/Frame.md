@@ -1,5 +1,5 @@
 # Type: Frame
-A `Frame` is a [`Shape`](Shape.md) representing a pure container for children.
+A `Frame` is a [`Shape`](./Shape.md) representing a pure container for children.
 
 The type has all properties of the type `Tangible`.
 

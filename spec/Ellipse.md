@@ -1,5 +1,5 @@
 # Type: Ellipse
-An `Ellipse` is a [`Shape`](Shape.md) representing an ellipse.
+An `Ellipse` is a [`Shape`](./Shape.md) representing an ellipse.
 
 The type has all properties of the type `Frame`.
 

@@ -1,5 +1,5 @@
 # Type: Tangible
-A `Tangible` Shape is any [`Shape`](Shape.md) that can be transformed with a defined set of transformations.
+A `Tangible` Shape is any [`Shape`](./Shape.md) that can be transformed with a defined set of transformations.
 
 The type has all properties of the type `Shape`.
 

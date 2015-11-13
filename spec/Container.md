@@ -5,7 +5,7 @@ A PJVG container has the following fields:
 - `format` (`string`): The value "pjvg".
 - `version` (`string`): The version of PJVG this container is designed for.
 - `features` (`string[]`): The features this container requires.
-- `document` ([`Document`](Document.md)): An object denoting the root element.
+- `document` ([`Document`](./Document.md)): An object denoting the root element.
 
 The following fields may also be present, and are optional:
 - `metadata` (`object`): A hashmap of metadata fields about the media.

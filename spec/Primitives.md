@@ -17,7 +17,7 @@ A color is an array containing a string format followed by a list of numbers.
 The following formats are defined:
 
 ### `rgb`
-A list of three numbers on [0, 255] defining a linear-space RGB color. Decimals may be rounded by implementations according to the algorithm defined in [the rendering notes document](Rendering.md).
+A list of three numbers on [0, 255] defining a linear-space RGB color. Decimals may be rounded by implementations according to the algorithm defined in [the rendering notes document](./Rendering.md).
 
 Optionally, a fourth number defines alpha.
 
