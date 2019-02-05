@@ -1,0 +1,1 @@
+PJVG is a lean JSON-based vector graphics format.

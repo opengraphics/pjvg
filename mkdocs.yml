@@ -1,0 +1,20 @@
+site_name: PJVG Specification
+repo_name: opengraphics/pjvg
+repo_url: https://github.com/opengraphics/pjvg
+
+theme:
+  name: material
+  palette:
+    primary: 'Orange'
+    accent: 'Orange'
+
+nav:
+  - Home: index.md
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
